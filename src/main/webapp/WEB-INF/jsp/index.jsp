@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>智能温室控制系统</title>
     <jsp:include page="include/commonfile.jsp"/>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script src="${ctx}/static/js/greenhouse-chart.js"></script>
 
 </head>
 
@@ -28,47 +31,7 @@
     </div><!--/.row-->
 
 
-    <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="panel panel-blue panel-widget ">
-                <div class="row no-padding">
-                    <div class="col-sm-3 col-lg-5 widget-left">
-                        <em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
-                    </div>
-                    <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large">120</div>
-                        <div class="text-muted">New Orders</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="panel panel-orange panel-widget">
-                <div class="row no-padding">
-                    <div class="col-sm-3 col-lg-5 widget-left">
-                        <em class="glyphicon glyphicon-comment glyphicon-l"></em>
-                    </div>
-                    <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large">52</div>
-                        <div class="text-muted">Comments</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="panel panel-teal panel-widget">
-                <div class="row no-padding">
-                    <div class="col-sm-3 col-lg-5 widget-left">
-                        <em class="glyphicon glyphicon-user glyphicon-l"></em>
-                    </div>
-                    <div class="col-sm-9 col-lg-7 widget-right">
-                        <div class="large">24</div>
-                        <div class="text-muted">New Users</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!--/.row-->
+
 
     <div class="row">
         <div class="col-lg-12">
@@ -81,7 +44,37 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>温室状态</h2>
+        </div>
+        <div class="col-md-6">
+            <div class="panel-primary">
+                <div class="panel-heading">温度状态</div>
+                <div class="panel-body">
+                    <div id="temperatureContainer" style="min-width:400px;height:400px"></div>
+                </div>
+            </div>
+        </div><!--/.col-->
+        <div class="col-md-6">
+            <div class="panel-primary">
+                <div class="panel-heading">湿度状态</div>
+                <div class="panel-body">
+                    <div id="humidityContainer" style="min-width:400px;height:400px"></div>
+                </div>
+            </div>
+        </div><!--/.col-->
+    </div>
+
+
 </div>	<!--/.main-->
+<script type="text/javascript">
+    temperatureChart();
+    humidityChart();
+    //每5秒刷新一次图表，实际应用中，适当延长时间，例如每分钟刷新一次图表
+    window.setInterval(temperatureChart, 5000);
+    window.setInterval(humidityChart, 5000);
+</script>
 <script type="text/javascript">
     function invocation() {
         var dataSend = {
@@ -113,26 +106,6 @@
             }
         });
     }
-</script>
-
-
-<script>
-    $('#calendar').datepicker({
-    });
-
-    !function ($) {
-        $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
 </script>
 </body>
 
