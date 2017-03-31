@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -35,8 +37,11 @@
 
     <div class="row">
         <div class="col-lg-12">
+            <h2>控制温室</h2>
+        </div>
+        <div class="col-lg-12">
             <div class="panel-primary">
-                <div class="panel-heading">发送指令</div>
+                <div class="panel-heading"></div>
                 <div class="panel-body">
                     <button id="invocations" type="button" onclick="invocation()" class="btn green">发送指令</button>
                 </div>
