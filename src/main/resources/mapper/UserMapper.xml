@@ -28,5 +28,17 @@
         WHERE u.role_id = rp.role_id and rp.permission_id = p.id and u.username = #{username}
     </select>
 
+    <update id="updateUser" parameterType="User">
+        UPDATE "user" SET password = #{password}, role_id = #{roleId} WHERE username = #{username}
+    </update>
+
+    <select id="getUserList" resultType="User">
+        SELECT * FROM user limit #{pageNumber} , #{pageSize}
+    </select>
+
+    <select id="countAllUser" resultType="int">
+        SELECT COUNT(*) FROM  "user"
+    </select>
+
 
 </mapper>

@@ -26,4 +26,11 @@ public class UserDaoTest extends BaseTest {
         User user = userDao.getByName("jyp");
         System.out.println(user.toString());
     }
+
+    @Test
+    public void testListUser(){
+        for (User user:userDao.getUserList(1,10)){
+            System.out.println(user.toString());
+        }
+    }
 }

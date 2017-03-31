@@ -6,6 +6,7 @@
 <link href="${ctx}/static/css/styles.css" rel="stylesheet">
 <script src="${ctx}/static/js/jquery-1.11.1.min.js"></script>
 <script src="${ctx}/static/js/bootstrap.min.js"></script>
+<script src="${ctx}/static/plugins/layer/layer.js"></script>
 <script>
     var path = '${ctx}';
 </script>
