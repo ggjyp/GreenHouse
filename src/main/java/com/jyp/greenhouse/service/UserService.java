@@ -42,11 +42,21 @@ public interface UserService {
     Set<String> getPermissions(String username) ;
 
     /**
-     * 修改user
-     * @param user
+     * 将指定username的roleId修改为roleId
+     * @param username
+     * @param roleID
      * @return
      */
-    boolean updateUser(User user);
+    boolean updateRoleId(String username, int roleID);
+
+    /**
+     * * 将指定username的password修改为password
+     * @param username
+     * @param password
+     * @return
+     */
+    boolean updatePassword(String username, String password);
+
 
     /**
      * 根据pageNumber和pageSize获取User列表

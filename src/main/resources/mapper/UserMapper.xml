@@ -28,8 +28,12 @@
         WHERE u.role_id = rp.role_id and rp.permission_id = p.id and u.username = #{username}
     </select>
 
-    <update id="updateUser" parameterType="User">
-        UPDATE "user" SET password = #{password}, role_id = #{roleId} WHERE username = #{username}
+    <update id="updateRoleId">
+        UPDATE user SET role_id = #{roleId} WHERE username = #{username}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE user SET password = #{password} WHERE username = #{username}
     </update>
 
     <select id="getUserPermissionList" resultType="com.jyp.greenhouse.dto.PermissionDTO">

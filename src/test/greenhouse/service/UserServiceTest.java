@@ -32,4 +32,16 @@ public class UserServiceTest extends BaseTest{
             System.out.println(user.toString());
         }
     }
+
+    @Test
+    public void testUpdateRoleId(){
+        String username = "jyp";
+        User user = userService.getUserByName(username);
+        if (user.getRoleId() == 1)
+            userService.updateRoleId(username,1);
+        else
+            userService.updateRoleId(username,3);
+
+        System.out.println(userService.getUserByName(username).toString());
+    }
 }

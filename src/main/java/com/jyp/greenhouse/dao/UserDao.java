@@ -44,11 +44,20 @@ public interface UserDao {
     Set<String> getPermissions(String username);
 
     /**
-     * 修改user
-     * @param user
+     * 将指定username的roleId修改为roleId
+     * @param username
+     * @param roleId
      * @return
      */
-    boolean updateUser(User user);
+    boolean updateRoleId(@Param("username") String username, @Param("roleId") int roleId);
+
+    /**
+     * 将指定username的password修改为password
+     * @param username
+     * @param password
+     * @return
+     */
+    boolean updatePassword(String username, String password);
 
     /**
      * 根据pageNumber和pageSize获取User列表

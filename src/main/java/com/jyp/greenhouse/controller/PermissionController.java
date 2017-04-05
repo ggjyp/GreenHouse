@@ -15,10 +15,17 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Author   : jyp
@@ -28,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "permission")
 public class PermissionController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     UserService userService;
     @Resource
@@ -38,7 +46,7 @@ public class PermissionController {
 
     @RequestMapping(value = "/list")
     public String permissionList(int pageNumber, int pageSize, HttpServletResponse response)
-        throws IOException {
+            throws IOException {
         response.setCharacterEncoding("utf-8");
         PrintWriter pw = response.getWriter();
         int total = userService.countAllUser();
@@ -53,7 +61,7 @@ public class PermissionController {
 
     @RequestMapping(value = "/listRoleNames")
     public String listRoleNames(HttpServletResponse response)
-        throws IOException {
+            throws IOException {
         response.setCharacterEncoding("utf-8");
         PrintWriter pw = response.getWriter();
         List<Role> roles = roleService.listRoles();
@@ -65,12 +73,29 @@ public class PermissionController {
     //跳转至修改权限页面
     @RequestMapping(value = "/toEdit", method = RequestMethod.GET , produces = "text/plain;charset=UTF-8")
     public String toEdit(HttpServletRequest request, Model model){
-        model.addAttribute("username",request.getParameter("username"));
+        model.addAttribute("user",userService.getUserByName(request.getParameter("username")));
         return "modify_role";
     }
 
-    @RequestMapping(value = "/modifyRole")
-    public void modifyRole(int roleId){
+
+    /**
+     * 修改权限
+     * @param username
+//     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/modifyRole", method = RequestMethod.POST)
+    @ResponseBody
+    public HashMap<String, String> modifyRole(String username, int roleId)  {
+        HashMap<String,String> map = new HashMap<>();
+
+        if(userService.updateRoleId(username, roleId)){
+            map.put("result","success");
+        }
+        else {
+            map.put("result","failed");
+        }
+        return map;
     }
 
 }

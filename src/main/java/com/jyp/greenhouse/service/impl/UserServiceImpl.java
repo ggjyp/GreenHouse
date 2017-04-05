@@ -47,8 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(User user) {
-        return userDao.updateUser(user);
+    public boolean updateRoleId(String username, int roleID) {
+        return userDao.updateRoleId(username, roleID);
+    }
+
+    @Override
+    public boolean updatePassword(String username, String password) {
+        return userDao.updatePassword(username, password);
     }
 
     @Override

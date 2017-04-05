@@ -32,9 +32,7 @@
             <li class="active">权限管理</li>
         </ol>
     </div><!--/.row-->
-
     <br>
-
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
@@ -105,15 +103,28 @@
         'click .edit': function (e, value, row, index) {
             //获取当前行对象
             var obj = jQuery.parseJSON(JSON.stringify(row));
-            window.location.href = '/permission/toEdit?username='+obj.username;
+//            window.location.href = '/permission/toEdit?username='+obj.username;
+//            layer.open({
+//                type: 1,
+//                closeBtn: false,
+//                shift: 2,
+//                shadeClose: true,
+//                content: $("#box1")
+//            });
+            layer.open({
+                type: 2,
+                title: false,
+                area: ['420px','400px'],
+                maxmin: false,
+                closeBtn: 1,
+                content: '/permission/toEdit?username='+obj.username
+            });
         }
     };
 </script>
 
 <script type="text/javascript">
-
     function get_roles() {
-
         $.ajax({
             type: "get",
             url: "/permission/listRoleNames", //获取json数据
@@ -131,9 +142,7 @@
                 alert("系统异常，请稍后再试！")
             }
         });
-
     }
-
     $(document).ready(function() {
         get_roles();
     });
