@@ -1,6 +1,7 @@
 package greenhouse.dao;
 
 import com.jyp.greenhouse.dao.UserDao;
+import com.jyp.greenhouse.dto.PermissionDTO;
 import com.jyp.greenhouse.pojo.User;
 import greenhouse.BaseTest;
 import org.junit.Test;
@@ -29,8 +30,13 @@ public class UserDaoTest extends BaseTest {
 
     @Test
     public void testListUser(){
-        for (User user:userDao.getUserList(1,10)){
-            System.out.println(user.toString());
+        for (PermissionDTO permissionDTO:userDao.getUserPermissionList(0,10)){
+            System.out.println(permissionDTO.toString());
         }
+    }
+
+    @Test
+    public void tesGetRoles(){
+        System.out.println(userDao.getRoles("jyp"));
     }
 }

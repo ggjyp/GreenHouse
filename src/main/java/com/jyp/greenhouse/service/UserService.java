@@ -1,5 +1,6 @@
 package com.jyp.greenhouse.service;
 
+import com.jyp.greenhouse.dto.PermissionDTO;
 import com.jyp.greenhouse.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,7 +54,7 @@ public interface UserService {
      * @param pageSize
      * @return
      */
-    List<User> getUserList(int pageNumber, int pageSize);
+    List<PermissionDTO> getUserPermissionList(int pageNumber, int pageSize);
 
     /**
      * 获取User总数

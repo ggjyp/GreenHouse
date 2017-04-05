@@ -32,12 +32,12 @@
         UPDATE "user" SET password = #{password}, role_id = #{roleId} WHERE username = #{username}
     </update>
 
-    <select id="getUserList" resultType="User">
-        SELECT * FROM user limit #{pageNumber} , #{pageSize}
+    <select id="getUserPermissionList" resultType="com.jyp.greenhouse.dto.PermissionDTO">
+        SELECT u.username, r.role_name FROM user u, role r where u.role_id = r.id limit #{pageNumber} , #{pageSize}
     </select>
 
     <select id="countAllUser" resultType="int">
-        SELECT COUNT(*) FROM  "user"
+        SELECT COUNT(*) FROM  user
     </select>
 
 

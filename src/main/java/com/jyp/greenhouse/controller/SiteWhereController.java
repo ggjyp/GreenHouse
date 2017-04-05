@@ -1,5 +1,15 @@
 package com.jyp.greenhouse.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.jyp.greenhouse.pojo.Measurement;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,36 +31,75 @@ import java.net.URLEncoder;
 @RequestMapping(value = "sitewhere")
 public class SiteWhereController {
 
-    @RequestMapping(value = "/assignments/measurements")
-    public String getSite(HttpSession session) throws IOException{
-        URL url = new URL( "http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/measurements");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        // 提交模式
-        conn.setRequestMethod("GET");// POST GET PUT DELETE
-        //将用户名密码转化为Base64编码
-//        String userInfo = "admin:password";
-//        String userInfoBase64 =  (new sun.misc.BASE64Encoder()).encode(userInfo.getBytes());//admin:password
-        //授权
-        conn.setRequestProperty("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
-        //租户身份认证
-        conn.setRequestProperty("X-SiteWhere-Tenant", "sitewhere1234567890");
-        // 设置访问提交模式，表单提交
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setConnectTimeout(15000);// 连接超时 单位毫秒
-        conn.setReadTimeout(15000);// 读取超时 单位毫秒
-        //读取请求返回值
-//       conn.setDoOutput(true);// 是否输入参数
-//
-//       StringBuffer params = new StringBuffer();
-//       // 表单参数与get形式一样
-//       params.append("f292139625cd4d59fcff42360ce11fc");
-//       byte[] bypes = params.toString().getBytes();
-//       conn.getOutputStream().write(bypes);// 输入参数
-        byte bytes[]=new byte[1024];
-        InputStream inStream=conn.getInputStream();
-        inStream.read(bytes, 0, inStream.available());
-        System.out.println(new String(bytes, "utf-8"));
-        session.setAttribute("measurements", new String(bytes, "utf-8"));
-        return "/login";
+    // @RequestMapping(value = "")
+
+
+    @RequestMapping(value = "/measurements")
+    public String getAssignmentsMeasurements(String page, String pageSize, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        PrintWriter pw = response.getWriter();
+        String assignmentToken  = "b8430c7c-5690-4fc7-ba13-644b66fbbe03";
+               String parameters = "?page="+ page +"&pageSize="+pageSize;
+        String uri = "http://localhost:8080/sitewhere/api/assignments/"
+            + assignmentToken + "/measurements" + parameters;
+
+        JSONObject jsonObject = getHtmlJsonByUrl(uri );
+        int total = (Integer)jsonObject.get("numResults");
+        List<Measurement> measurements = new ArrayList<>();
+
+        JSONArray results = jsonObject.getJSONArray("results");
+        JSONObject result;
+        JSONObject measurementObj;
+        //循环次数超过10次就不能继续
+        for (int i = 0; i < results.size(); i++){
+            result = results.getJSONObject(i);
+            measurementObj = result.getJSONObject("measurements");
+            double temperature = Double.valueOf(measurementObj.get("temperature").toString());
+            double humidity = Double.valueOf(measurementObj.get("humidity").toString());
+            System.out.println(temperature);
+            System.out.println(humidity);
+            Measurement measurement = new Measurement(temperature,humidity);
+            measurements.add(measurement);
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("rows", measurements);
+        String json = JSONObject.toJSONString(map);
+        pw.print(json);
+        return null;
+
+    }
+
+
+    /**
+     * 访问urlTemp并获取JSON对象
+     * @param urlTemp
+     * @return
+     */
+    private static JSONObject getHtmlJsonByUrl(String urlTemp){
+        URL url = null;
+        InputStreamReader input = null;
+        HttpURLConnection conn;
+        JSONObject jsonObj = null;
+        try {
+            url = new URL(urlTemp);
+            conn = (HttpURLConnection) url.openConnection();
+            //授权
+            conn.setRequestProperty("Authorization", "Basic YWRtaW46cGFzc3dvcmQ=");
+            //租户身份认证
+            conn.setRequestProperty("X-SiteWhere-Tenant", "sitewhere1234567890");
+            input = new InputStreamReader(conn.getInputStream(),"utf-8");
+            Scanner inputStream = new Scanner(input);
+            StringBuffer sb = new StringBuffer();
+            while (inputStream.hasNext()) {
+                sb.append(inputStream.nextLine());
+            }
+            jsonObj = JSONObject.parseObject(sb.toString());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return jsonObj;
     }
 }

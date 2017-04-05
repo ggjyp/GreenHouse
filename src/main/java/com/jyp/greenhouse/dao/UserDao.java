@@ -1,5 +1,6 @@
 package com.jyp.greenhouse.dao;
 
+import com.jyp.greenhouse.dto.PermissionDTO;
 import com.jyp.greenhouse.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -55,12 +56,14 @@ public interface UserDao {
      * @param pageSize
      * @return
      */
-    List<User> getUserList(@Param("pageNumber") int pageNumber, @Param("pageSize") int pageSize);
+    List<PermissionDTO> getUserPermissionList(@Param("pageNumber") int pageNumber, @Param("pageSize") int pageSize);
 
     /**
      * 获取User总数
      * @return
      */
     int countAllUser();
+
+
 
 }

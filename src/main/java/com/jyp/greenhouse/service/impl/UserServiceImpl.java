@@ -1,6 +1,7 @@
 package com.jyp.greenhouse.service.impl;
 
 import com.jyp.greenhouse.dao.UserDao;
+import com.jyp.greenhouse.dto.PermissionDTO;
 import com.jyp.greenhouse.pojo.User;
 import com.jyp.greenhouse.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -51,8 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserList(int pageNumber, int pageSize) {
-        return userDao.getUserList(pageNumber, pageSize);
+    public List<PermissionDTO> getUserPermissionList(int pageNumber, int pageSize) {
+        return userDao.getUserPermissionList(pageNumber, pageSize);
     }
 
     @Override

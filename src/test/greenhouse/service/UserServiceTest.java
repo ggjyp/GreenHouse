@@ -1,5 +1,6 @@
 package greenhouse.service;
 
+import com.jyp.greenhouse.dto.PermissionDTO;
 import com.jyp.greenhouse.pojo.User;
 import com.jyp.greenhouse.service.UserService;
 import greenhouse.BaseTest;
@@ -26,8 +27,8 @@ public class UserServiceTest extends BaseTest{
     public void testListUser(){
         int pageNumber = 1;
         int pageSize = 10;
-        List<User> userList = userService.getUserList((pageNumber-1)*pageSize, pageSize);
-        for(User user:userList){
+        List<PermissionDTO> userList = userService.getUserPermissionList((pageNumber-1)*pageSize, pageSize);
+        for(PermissionDTO user:userList){
             System.out.println(user.toString());
         }
     }

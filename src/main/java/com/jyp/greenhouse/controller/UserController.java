@@ -1,7 +1,12 @@
 package com.jyp.greenhouse.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.jyp.greenhouse.pojo.Measurement;
 import com.jyp.greenhouse.pojo.User;
 import com.jyp.greenhouse.service.UserService;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -74,24 +79,25 @@ public class UserController {
      * bootstrap-table访问此URL
      * 根据pageSize和pageNumber获取userList
      * bootstrap-table需要userList用户列表和rows总记录数
-     * @param offset
+     * @param
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Map userList(Integer offset){
-        //根据当前页码和页面大小获取用户记录表
-        int pageSize = 10;
-        System.out.println("offset--->"+offset);
-        System.out.println("pageSize--->"+pageSize);
-        List<User> userList = userService.getUserList(offset, pageSize);
-        //获取总记录数
-        int total = userService.countAllUser();
-        Map<String, Object> map = new HashMap<>();
-        map.put("total", userList);
-        map.put("rows", total);
-        return map;
-    }
+    // @RequestMapping(value = "/list", method = RequestMethod.GET)
+    // public String listUsers(Integer pageNumber, Integer pageSize, HttpServletResponse response) throws IOException {
+    //     System.out.println("pageNumber--->"+pageNumber);
+    //     System.out.println("pageSize--->"+pageSize);
+    //     response.setCharacterEncoding("utf-8");
+    //     PrintWriter pw = response.getWriter();
+    //     int total = userService.countAllUser();
+    //     List<User> users = userService.getUserList((pageNumber-1)*pageSize,pageSize);
+    //     Map<String, Object> map = new HashMap<>();
+    //     map.put("total", total);
+    //     map.put("rows", users);
+    //     String json = JSONObject.toJSONString(map);
+    //     pw.print(json);
+    //     return null;
+    // }
 
     @RequestMapping(value = "toEdit",method = RequestMethod.GET)
     public String edit(String username,Model model){

@@ -12,9 +12,7 @@
 </head>
 <body>
 
-${user.username}
-<br>
-${user.roleId}
+<input name="versionId" id="versionId" class="form-control" value="${username}">
 
 </body>
 </html>
