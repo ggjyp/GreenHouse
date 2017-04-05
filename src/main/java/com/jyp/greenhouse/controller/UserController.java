@@ -12,10 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -75,35 +72,48 @@ public class UserController {
 
     }
 
-    /**
-     * bootstrap-table访问此URL
-     * 根据pageSize和pageNumber获取userList
-     * bootstrap-table需要userList用户列表和rows总记录数
-     * @param
-     * @return
-     * @throws IOException
-     */
-    // @RequestMapping(value = "/list", method = RequestMethod.GET)
-    // public String listUsers(Integer pageNumber, Integer pageSize, HttpServletResponse response) throws IOException {
-    //     System.out.println("pageNumber--->"+pageNumber);
-    //     System.out.println("pageSize--->"+pageSize);
-    //     response.setCharacterEncoding("utf-8");
-    //     PrintWriter pw = response.getWriter();
-    //     int total = userService.countAllUser();
-    //     List<User> users = userService.getUserList((pageNumber-1)*pageSize,pageSize);
-    //     Map<String, Object> map = new HashMap<>();
-    //     map.put("total", total);
-    //     map.put("rows", users);
-    //     String json = JSONObject.toJSONString(map);
-    //     pw.print(json);
-    //     return null;
-    // }
-
-    @RequestMapping(value = "toEdit",method = RequestMethod.GET)
-    public String edit(String username,Model model){
+    @RequestMapping(value = "toEditPwd",method = RequestMethod.GET)
+    public String toEditPwd(String username,Model model){
         User user =userService.getUserByName(username);
         model.addAttribute("user",user);
-        return "modify_role";
+        return "modify_password";
+    }
+
+    /**
+     * 修改密码
+     * @param username
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "editPassword", method = RequestMethod.POST)
+    public HashMap editPassword(
+            String username,
+            String oldPwd,
+            String newPwd
+    )  {
+        HashMap<String ,String> map = new HashMap<>();
+        System.out.println("username-->"+username);
+        System.out.println("oldPwd-->"+oldPwd);
+        System.out.println("newPwd-->"+newPwd);
+        User user = userService.getUserByName(username);
+        if (user.getPassword().equals(oldPwd)){
+            if (userService.updatePassword(username,newPwd)) {
+                //修改成功
+                map.put("result","success");
+            }
+            else {
+                //修改失败
+                map.put("result","failed");
+            }
+        }
+        else {
+            //旧密码错误
+            map.put("result","error");
+        }
+        System.out.println(map.toString());
+        return map;
     }
 
 

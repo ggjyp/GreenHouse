@@ -57,7 +57,7 @@ public interface UserDao {
      * @param password
      * @return
      */
-    boolean updatePassword(String username, String password);
+    boolean updatePassword(@Param("username") String username, @Param("password") String password);
 
     /**
      * 根据pageNumber和pageSize获取User列表

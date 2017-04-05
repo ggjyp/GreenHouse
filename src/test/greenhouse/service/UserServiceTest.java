@@ -44,4 +44,12 @@ public class UserServiceTest extends BaseTest{
 
         System.out.println(userService.getUserByName(username).toString());
     }
+
+    @Test
+    public void testUpdatePassword(){
+        if (userService.updatePassword("admin","333333"))
+            System.out.println("修改成功");
+        else
+            System.out.println("修改失败");
+    }
 }
