@@ -43,6 +43,7 @@
             <div class="panel-primary">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
+                    <input type="hidden" id="currentUser" value="${username}">
                     <button id="offLED" type="button" onclick="offLED()" class="btn green">关灯</button>
                     <button id="onLED" type="button" onclick="onLED()" class="btn green">开灯</button>
                 </div>
@@ -105,16 +106,40 @@
                 request.setRequestHeader("X-SiteWhere-Tenant","sitewhere1234567890");
                 request.setRequestHeader("Authorization","Basic YWRtaW46cGFzc3dvcmQ=");
             },
-            success: function (result) {
+            success: function () {
+                //数据库增加一条日志记录
+                var log = {
+                    "operateFrom":$("#currentUser").val(),
+                    "operateTo":"LED",
+                    "behavior":"close",
+                    "state":"1"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/log/addLog",
+                    data: log,
+                    dataType: "json",
+                    success: function (date) {
+                        if (date.result == "success") {
+                            layer.msg("操作成功")
+                        }
+                        if (date.result == "failed") {
+                            layer.msg("操作失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg("系统错误")
+                    }
+                });
             },
             error: function () {
-                alert("error")
+                layer.msg("error")
             }
         });
     }
     function onLED() {
         var dataSend = {
-            "eventDate" : "2018-12-10T13:11:45.122-0500",
+            "eventDate" : "2019-12-10T13:11:45.122-0500",
             "updateState" : "false",
             "initiator" : "REST",
             "initiatorId" : "admin",
@@ -124,6 +149,7 @@
                 "message" : "1"
             }
         };
+        //ajax调用SiteWhere接口
         $.ajax({
             type: "POST",
             contentType: "application/json;charset=utf-8",
@@ -135,10 +161,34 @@
                 request.setRequestHeader("X-SiteWhere-Tenant","sitewhere1234567890");
                 request.setRequestHeader("Authorization","Basic YWRtaW46cGFzc3dvcmQ=");
             },
-            success: function (result) {
+            success: function () {
+                //数据库增加一条日志记录
+                var log = {
+                    "operateFrom":$("#currentUser").val(),
+                    "operateTo":"LED",
+                    "behavior":"open",
+                    "state":"1"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/log/addLog",
+                    data: log,
+                    dataType: "json",
+                    success: function (date) {
+                        if (date.result == "success") {
+                            layer.msg("操作成功")
+                        }
+                        if (date.result == "failed") {
+                            layer.msg("操作失败")
+                        }
+                    },
+                    error: function () {
+                        layer.msg("系统错误")
+                    }
+                });
             },
             error: function () {
-                alert("error")
+                layer.msg("error")
             }
         });
     }

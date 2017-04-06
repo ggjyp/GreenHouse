@@ -40,6 +40,7 @@ public class LogController {
     }
 
     @RequestMapping(value = "/addLog")
+    @ResponseBody
     public HashMap<String,String> addLog(
             String operateFrom,
             String operateTo,

@@ -16,7 +16,7 @@
     </insert>
 
     <select id="listLogs" resultType="Log">
-        SELECT * FROM log limit #{pageNumber} , #{pageSize}
+        SELECT * FROM log ORDER BY date DESC limit #{pageNumber} , #{pageSize}
     </select>
 
     <select id="countAllLog" resultType="int">
