@@ -22,11 +22,29 @@ public class LogDaoTest extends BaseTest {
     public void testSaveLog(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         Log log = new Log();
-        log.setFrom("jyp");
-        log.setTo("LED");
+        log.setOperateFrom("jyp");
+        log.setOperateTo("LED");
         log.setDate(df.format(new Date()));
-        log.setBehavior("open");
+        log.setBehavior("close");
         log.setState(1);
         logDao.saveLog(log);
+    }
+
+    @Test
+    public void testGetById(){
+        System.out.println(logDao.getById(1).toString());
+    }
+
+    @Test
+    public void testListLogs(){
+        int pageNumber = 0;
+        int pageSize = 10;
+        for (Log log:logDao.listLogs(pageNumber,pageSize))
+            System.out.println(log.toString());
+    }
+
+    @Test
+    public void testCountAllLog(){
+        System.out.println(logDao.countAllLog());
     }
 }

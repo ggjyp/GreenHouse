@@ -19,11 +19,11 @@
         <data-type>int(11)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="8" parent="2" name="from">
+      <column id="8" parent="2" name="operate_from">
         <comment>操作者</comment>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="9" parent="2" name="to">
+      <column id="9" parent="2" name="operate_to">
         <comment>操作对象</comment>
         <data-type>varchar(50)</data-type>
       </column>

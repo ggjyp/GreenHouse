@@ -12,7 +12,7 @@
         INSERT INTO log
         (operate_from,operate_to,date,behavior,state)
         VALUES
-        (#{from},#{to},#{date},#{behavior},#{state})
+        (#{operateFrom},#{operateTo},#{date},#{behavior},#{state})
     </insert>
 
     <select id="listLogs" resultType="Log">

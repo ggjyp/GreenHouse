@@ -43,7 +43,8 @@
             <div class="panel-primary">
                 <div class="panel-heading"></div>
                 <div class="panel-body">
-                    <button id="invocations" type="button" onclick="invocation()" class="btn green">发送指令</button>
+                    <button id="offLED" type="button" onclick="offLED()" class="btn green">关灯</button>
+                    <button id="onLED" type="button" onclick="onLED()" class="btn green">开灯</button>
                 </div>
             </div>
         </div>
@@ -81,7 +82,7 @@
     window.setInterval(humidityChart, 5000);
 </script>
 <script type="text/javascript">
-    function invocation() {
+    function offLED() {
         var dataSend = {
             "eventDate" : "2018-12-10T13:11:45.122-0500",
             "updateState" : "false",
@@ -90,7 +91,37 @@
             "target" : "Assignment",
             "commandToken" : "50060363-4152-410b-81a1-d8a1d8d1c972",
             "parameterValues" : {
-                "message" : "111"
+                "message" : "2"
+            }
+        };
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            url: "http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/invocations",
+            data:JSON.stringify(dataSend),
+            dataType: "json",
+            beforeSend: function(request){
+                request.setRequestHeader("Content-Type","application/json");
+                request.setRequestHeader("X-SiteWhere-Tenant","sitewhere1234567890");
+                request.setRequestHeader("Authorization","Basic YWRtaW46cGFzc3dvcmQ=");
+            },
+            success: function (result) {
+            },
+            error: function () {
+                alert("error")
+            }
+        });
+    }
+    function onLED() {
+        var dataSend = {
+            "eventDate" : "2018-12-10T13:11:45.122-0500",
+            "updateState" : "false",
+            "initiator" : "REST",
+            "initiatorId" : "admin",
+            "target" : "Assignment",
+            "commandToken" : "50060363-4152-410b-81a1-d8a1d8d1c972",
+            "parameterValues" : {
+                "message" : "1"
             }
         };
         $.ajax({

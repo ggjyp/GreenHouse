@@ -3,16 +3,13 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-    <title>CMSDemo|页面管理</title>
+    <title>智能温室系统|权限管理</title>
     <jsp:include page="include/commonfile.jsp"/>
     <%--开始引入bootstrap-table--%>
     <link href="${ctx}/static/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
     <script src="${ctx}/static/plugins/bootstrap-table/bootstrap-table.js"></script>
     <script src="${ctx}/static/plugins/bootstrap-table/bootstrap-table-zh-CN.js"></script>
     <%--结束引入bootstrap-table--%>
-    <%--开始引入layer--%>
-    <script src="${ctx}/static/plugins/layer/layer.js"></script>
-    <%--结束引入layer--%>
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
@@ -22,7 +19,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">页面管理</h1>
+            <h1 class="page-header">权限管理</h1>
         </div>
     </div><!--/.row-->
 

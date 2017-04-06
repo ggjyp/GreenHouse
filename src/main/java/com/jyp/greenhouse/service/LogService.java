@@ -1,4 +1,4 @@
-package com.jyp.greenhouse.dao;
+package com.jyp.greenhouse.service;
 
 import com.jyp.greenhouse.pojo.Log;
 import org.apache.ibatis.annotations.Param;
@@ -7,11 +7,10 @@ import java.util.List;
 
 /**
  * Author   : jyp
- * Date     : 2017/4/5 16:52
- * Describe : 日志Dao类
+ * Date     : 2017/4/6 9:59
+ * Describe :
  */
-public interface LogDao {
-
+public interface LogService {
     /**
      * 根据日志编号获取日志
      * @param id

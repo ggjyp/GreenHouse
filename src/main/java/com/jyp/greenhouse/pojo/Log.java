@@ -7,8 +7,8 @@ package com.jyp.greenhouse.pojo;
  */
 public class Log {
     private long id;
-    private String from;
-    private String to;
+    private String operateFrom;
+    private String operateTo;
     private String date;
     private String behavior;
     private int state;//0：失败，1：成功
@@ -21,20 +21,20 @@ public class Log {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getOperateFrom() {
+        return operateFrom;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setOperateFrom(String operateFrom) {
+        this.operateFrom = operateFrom;
     }
 
-    public String getTo() {
-        return to;
+    public String getOperateTo() {
+        return operateTo;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setOperateTo(String operateTo) {
+        this.operateTo = operateTo;
     }
 
     public String getDate() {
@@ -64,10 +64,10 @@ public class Log {
     public Log() {
     }
 
-    public Log(long id, String from, String to, String date, String behavior, int state) {
+    public Log(long id, String operateFrom, String operateTo, String date, String behavior, int state) {
         this.id = id;
-        this.from = from;
-        this.to = to;
+        this.operateFrom = operateFrom;
+        this.operateTo = operateTo;
         this.date = date;
         this.behavior = behavior;
         this.state = state;
@@ -77,8 +77,8 @@ public class Log {
     public String toString() {
         return "Log{" +
                 "id=" + id +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
+                ", operateFrom='" + operateFrom + '\'' +
+                ", operateTo='" + operateTo + '\'' +
                 ", date='" + date + '\'' +
                 ", behavior='" + behavior + '\'' +
                 ", state=" + state +
