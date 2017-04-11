@@ -11,9 +11,9 @@
             <a class="navbar-brand" href="#"><span>智能温室</span>管理系统</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>${username}<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>${sessionScope.username}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/user/toEditPwd?username=${username}"><span class="glyphicon glyphicon-user"></span> 修改密码</a></li>
+                        <li><a href="/user/toEditPwd?username=${sessionScope.username}"><span class="glyphicon glyphicon-user"></span> 修改密码</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
                     </ul>
                 </li>

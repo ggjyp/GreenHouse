@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jyp.greenhouse.pojo.Measurement;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,14 +32,17 @@ import java.net.URLEncoder;
 @RequestMapping(value = "sitewhere")
 public class SiteWhereController {
 
-    // @RequestMapping(value = "")
-
+     @RequestMapping(value = "")
+     public String toSiteWhere() {
+         return "measurements_show";
+     }
 
     @RequestMapping(value = "/measurements")
     public String getAssignmentsMeasurements(String page, String pageSize, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("utf-8");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         PrintWriter pw = response.getWriter();
-        String assignmentToken  = "b8430c7c-5690-4fc7-ba13-644b66fbbe03";
+        String assignmentToken  = "83d43843-c4a7-403c-83ac-9dc0d1918aba";
                String parameters = "?page="+ page +"&pageSize="+pageSize;
         String uri = "http://localhost:8080/sitewhere/api/assignments/"
             + assignmentToken + "/measurements" + parameters;
@@ -56,9 +60,11 @@ public class SiteWhereController {
             measurementObj = result.getJSONObject("measurements");
             double temperature = Double.valueOf(measurementObj.get("temperature").toString());
             double humidity = Double.valueOf(measurementObj.get("humidity").toString());
+            String eventDate = result.get("eventDate").toString();
             System.out.println(temperature);
             System.out.println(humidity);
-            Measurement measurement = new Measurement(temperature,humidity);
+            System.out.println(eventDate);
+            Measurement measurement = new Measurement(temperature,humidity,eventDate);
             measurements.add(measurement);
         }
 

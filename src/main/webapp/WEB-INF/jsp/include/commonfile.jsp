@@ -10,3 +10,4 @@
 <script>
     var path = '${ctx}';
 </script>
+<input id="roleId" type="hidden" value="${sessionScope.roleId}">

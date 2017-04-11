@@ -32,30 +32,24 @@
     <br>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <p><button onclick="window.location.href='${ctx}/autoControlParam/toAdd'" class="btn btn-primary">新增自控参数</button></p>
-                    <table  id="paramTable" data-toggle="table" >
-                        <thead>
-                        <tr>
-                            <th data-field="paramName" >参数名</th>
-                            <th data-field="temperatureMin">温度下限</th>
-                            <th data-field="temperatureMax">温度上限</th>
-                            <th data-field="humidityMin">湿度下限</th>
-                            <th data-field="humidityMax">湿度上限</th>
-                            <th data-field="lightIntensityMin">光照强度下限</th>
-                            <th data-field="lightIntensityMax">光照强度上限</th>
-                            <th data-field="soilMoistureMin">土壤湿度下限</th>
-                            <th data-field="soilMoistureMax">土壤湿度上限</th>
-                            <th data-field="modifyDate">修改时间</th>
-                            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-
-            </div>
+            <p><button onclick="window.location.href='${ctx}/autoControlParam/toAdd'" class="btn btn-primary">新增自控参数</button></p>
+            <table  id="paramTable" data-toggle="table" >
+                <thead>
+                <tr>
+                    <th data-field="paramName" >参数名</th>
+                    <th data-field="temperatureMin">温度下限</th>
+                    <th data-field="temperatureMax">温度上限</th>
+                    <th data-field="humidityMin">湿度下限</th>
+                    <th data-field="humidityMax">湿度上限</th>
+                    <th data-field="lightIntensityMin">光照强度下限</th>
+                    <th data-field="lightIntensityMax">光照强度上限</th>
+                    <th data-field="soilMoistureMin">土壤湿度下限</th>
+                    <th data-field="soilMoistureMax">土壤湿度上限</th>
+                    <th data-field="modifyDate">修改时间</th>
+                    <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>
@@ -94,9 +88,9 @@
     });
     function actionFormatter(value, row, index) {
         return [
-            '<button class="btn btn-success use" >启用</button>',
-            '<button class="btn btn-success edit" >编辑</button>',
-            '<button class="btn btn-success delete" >删除</button>'
+            '<button class="btn btn-primary use" >启用</button>',
+            '<button class="btn btn-primary edit" >编辑</button>',
+            '<button class="btn btn-primary delete" >删除</button>'
 
 
         ].join('');

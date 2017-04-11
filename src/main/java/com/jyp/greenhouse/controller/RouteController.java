@@ -23,4 +23,8 @@ public class RouteController {
 
     @RequestMapping(value = "unAuthorization")
     public String unAuthorization() { return "unAuthorization";}
+
+    //测试用例
+    @RequestMapping(value = "test")
+    public String test() { return "send_param_test";}
 }

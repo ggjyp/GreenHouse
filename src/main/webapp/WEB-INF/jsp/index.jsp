@@ -18,34 +18,32 @@
 
 <jsp:include page="include/sidebar.jsp"/>
 
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-            <li class="active">首页</li>
-        </ol>
-    </div><!--/.row-->
 
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">首页</h1>
         </div>
     </div><!--/.row-->
 
-
-
-
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active">首页</li>
+        </ol>
+    </div><!--/.row-->
     <div class="row">
         <div class="col-lg-12">
             <h2>控制温室</h2>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="panel-primary">
-                <div class="panel-heading"></div>
+                <div class="panel-heading">LED灯</div>
                 <div class="panel-body">
                     <input type="hidden" id="currentUser" value="${username}">
-                    <button id="offLED" type="button" onclick="offLED()" class="btn green">关灯</button>
-                    <button id="onLED" type="button" onclick="onLED()" class="btn green">开灯</button>
+                    <button id="offLED" type="button" onclick="closeLED()" class="btn btn-primary">关灯</button>
+                    <button id="onLED" type="button" onclick="openLED()" class="btn btn-primary">开灯</button>
                 </div>
             </div>
         </div>
@@ -83,22 +81,25 @@
     window.setInterval(humidityChart, 5000);
 </script>
 <script type="text/javascript">
-    function offLED() {
+    function closeLED() {
+        var message = {
+            "type" : "switch",
+            "state" : "close"
+        }
         var dataSend = {
-            "eventDate" : "2018-12-10T13:11:45.122-0500",
             "updateState" : "false",
             "initiator" : "REST",
             "initiatorId" : "admin",
             "target" : "Assignment",
-            "commandToken" : "50060363-4152-410b-81a1-d8a1d8d1c972",
+            "commandToken" : "e8b9b58e-10ea-4b76-b18b-c57c4a4ebd69",
             "parameterValues" : {
-                "message" : "2"
+                "message" : JSON.stringify(message)
             }
         };
         $.ajax({
             type: "POST",
             contentType: "application/json;charset=utf-8",
-            url: "http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/invocations",
+            url: "http://localhost:8080/sitewhere/api/assignments/83d43843-c4a7-403c-83ac-9dc0d1918aba/invocations",
             data:JSON.stringify(dataSend),
             dataType: "json",
             beforeSend: function(request){
@@ -137,23 +138,26 @@
             }
         });
     }
-    function onLED() {
+    function openLED() {
+        var message = {
+            "type" : "switch",
+            "state" : "open"
+        }
         var dataSend = {
-            "eventDate" : "2019-12-10T13:11:45.122-0500",
             "updateState" : "false",
             "initiator" : "REST",
             "initiatorId" : "admin",
             "target" : "Assignment",
-            "commandToken" : "50060363-4152-410b-81a1-d8a1d8d1c972",
+            "commandToken" : "e8b9b58e-10ea-4b76-b18b-c57c4a4ebd69",
             "parameterValues" : {
-                "message" : "1"
+                "message" : JSON.stringify(message)
             }
         };
         //ajax调用SiteWhere接口
         $.ajax({
             type: "POST",
             contentType: "application/json;charset=utf-8",
-            url: "http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/invocations",
+            url: "http://localhost:8080/sitewhere/api/assignments/83d43843-c4a7-403c-83ac-9dc0d1918aba/invocations",
             data:JSON.stringify(dataSend),
             dataType: "json",
             beforeSend: function(request){
@@ -192,6 +196,7 @@
             }
         });
     }
+
 </script>
 </body>
 

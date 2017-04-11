@@ -11,7 +11,7 @@ function temperatureChart(){
     var eventDateArray =[];
     $.ajax({
         //参数page=1,pageSize=5，表示显示最新的5个数据
-        url:"http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/measurements?page=1&pageSize=5",
+        url:"http://localhost:8080/sitewhere/api/assignments/83d43843-c4a7-403c-83ac-9dc0d1918aba/measurements?page=1&pageSize=5",
         dataType: 'html',
         method: 'GET',
         async : false,//设置为同步操作就可以给全局变量赋值成功
@@ -73,7 +73,7 @@ function humidityChart(){
     var humidityArray = [];
     var eventDateArray =[];
     $.ajax({
-        url:"http://localhost:8080/sitewhere/api/assignments/b8430c7c-5690-4fc7-ba13-644b66fbbe03/measurements?page=1&pageSize=5",
+        url:"http://localhost:8080/sitewhere/api/assignments/83d43843-c4a7-403c-83ac-9dc0d1918aba/measurements?page=1&pageSize=5",
         dataType: 'html',
         method: 'GET',
         async : false,//设置为同步操作就可以给全局变量赋值成功

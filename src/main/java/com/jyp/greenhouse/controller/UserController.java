@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,7 +42,7 @@ public class UserController {
      * 登录模块
      * @param username
      * @param password
-     * @param codevalidate
+//     * @param codevalidate
      * @param session
      * @return
      */
@@ -49,20 +50,17 @@ public class UserController {
     public ModelAndView login(
             String username,
             String password,
-            String codevalidate,
             HttpSession session
     ) {
         ModelAndView ret;
-        String code = (String) session.getAttribute("codeValidate");
-        if (codevalidate == null || !codevalidate.equalsIgnoreCase(code)){
-            session.setAttribute("error","验证码错误");
-            ret = new ModelAndView("login");
-        }
         Subject subject = SecurityUtils.getSubject() ;
+
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         try {
             subject.login(token);
+            User user = userService.getUserByName(username);
             session.setAttribute("username",username);
+            session.setAttribute("roleId",user.getRoleId());
             ret = new ModelAndView(new RedirectView("/index"));
             System.out.println("登陆成功");
         }catch (Exception e){

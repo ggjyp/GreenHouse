@@ -21,7 +21,7 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败，则跳转到登录页面的配置 -->
-        <property name="loginUrl" value=""/>
+        <property name="loginUrl" value="/"/>
         <!-- 权限认证失败，则跳转到指定页面 -->
         <property name="unauthorizedUrl" value="/unAuthorization"/>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
@@ -31,7 +31,11 @@
                 /login=anon
                 <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
                 <!--roles[xxx]的参数填的是角色名-->
-                /index=roles[管理员]
+                /index=roles["管理员","普通用户"]
+                <!--/index=roles[普通用户]-->
+                /permission=roles[管理员]
+                /log=roles[管理员]
+                /autoControlParam=roles[管理员]
 
             </value>
         </property>

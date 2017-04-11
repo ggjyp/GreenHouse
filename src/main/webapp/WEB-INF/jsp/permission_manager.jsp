@@ -32,22 +32,15 @@
     <br>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-                    <table  id="pageTable" data-toggle="table" >
-                        <thead>
-                        <tr>
-                            <%--data-field的值为pojo类的属性值，不是数据库字段--%>
-                            <th data-field="username" >用户名</th>
-                            <th data-field="roleName">权限名</th>
-                            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-
-            </div>
+            <table  id="pageTable" data-toggle="table" >
+                <thead>
+                <tr>
+                    <th data-field="username" >用户名</th>
+                    <th data-field="roleName">权限名</th>
+                    <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>

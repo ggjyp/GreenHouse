@@ -8,13 +8,15 @@ package com.jyp.greenhouse.pojo;
 public class Measurement {
     private double temperature;
     private double humidity;
+    private String eventDate;
 
     public Measurement() {
     }
 
-    public Measurement(double temperature, double humidity) {
+    public Measurement(double temperature, double humidity, String eventDate) {
         this.temperature = temperature;
         this.humidity = humidity;
+        this.eventDate = eventDate;
     }
 
     public double getTemperature() {
@@ -33,11 +35,20 @@ public class Measurement {
         this.humidity = humidity;
     }
 
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
     @Override
     public String toString() {
         return "Measurement{" +
-            "temperature=" + temperature +
-            ", humidity=" + humidity +
-            '}';
+                "temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", eventDate='" + eventDate + '\'' +
+                '}';
     }
 }

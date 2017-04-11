@@ -1,4 +1,3 @@
-<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
@@ -10,12 +9,12 @@
     <jsp:include page="include/commonfile.jsp"/>
 </head>
 
-<body>
+<body style="background-color: #7bbaf7">
 
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-        <div class="login-panel panel panel-default">
-            <div class="panel-heading">CMSDemo</div>
+        <div class="login-panel panel panel-primary">
+            <div class="panel-heading">登录</div>
             <div class="panel-body">
                 <form role="form" action="${ctx}/user/login" method="post">
                     <fieldset>
@@ -26,11 +25,7 @@
                             <input class="form-control" placeholder="请输入密码" name="password" type="password" value="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="请输入验证码" name="codevalidate" type="text">
-                        </div>
-                        <div class="form-group">
-                            <img id="codevalidate" src="/code/<%=new Date().getTime()%>" onclick="changeUrl()">
-                            <button type="submit" class="btn btn-primary pull-right">登录</button>
+                            <button type="submit" class="btn btn-primary">登录</button>
                         </div>
 
                     </fieldset>
