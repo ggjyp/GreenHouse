@@ -6,6 +6,8 @@ package com.jyp.greenhouse.util;
  * Describe : 字符串全局变量
  */
 public class StringUtil {
+    //MD5的salt值
+    public static final String SALT="jyp";
     //角色字段
     public static final int ROLE_COMMON=1;//普通用户
     public static final int ROLE_ADMIN=2;//管理员

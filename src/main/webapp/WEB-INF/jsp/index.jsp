@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -33,6 +34,7 @@
             <li class="active">首页</li>
         </ol>
     </div><!--/.row-->
+    <shiro:hasRole name="管理员">
     <div class="row">
         <div class="col-lg-12">
             <h2>控制温室</h2>
@@ -48,6 +50,7 @@
             </div>
         </div>
     </div>
+    </shiro:hasRole>
 
     <div class="row">
         <div class="col-lg-12">

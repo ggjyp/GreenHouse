@@ -29,14 +29,10 @@
             <value>
                 <!--anon 表示匿名访问，不需要认证以及授权-->
                 /login=anon
-                <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
-                <!--roles[xxx]的参数填的是角色名-->
-                /index=roles["管理员","普通用户"]
-                <!--/index=roles[普通用户]-->
+                <!--/index=roles[普通用户,管理员]-->
                 /permission=roles[管理员]
                 /log=roles[管理员]
                 /autoControlParam=roles[管理员]
-
             </value>
         </property>
     </bean>

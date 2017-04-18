@@ -100,7 +100,47 @@
         'click .use': function (e, value, row, index) {
             //获取当前行对象
             var obj = jQuery.parseJSON(JSON.stringify(row));
-            window.location.href = '/autoControlParam/toEdit?paramName='+obj.paramName;
+//           需要转换成float
+            var message = {
+                "type":"autoCtrlParam",
+                "temperatureMin": obj.temperatureMin,
+                "temperatureMax": obj.temperatureMax,
+                "humidityMin": obj.humidityMin,
+                "humidityMax": obj.humidityMax,
+                "lightIntensityMin":obj.lightIntensityMin,
+                "lightIntensityMax":obj.lightIntensityMax,
+                "soilMoistureMin":obj.soilMoistureMin,
+                "soilMoistureMax":obj.soilMoistureMax
+            };
+            var dataSend = {
+                "updateState" : "false",
+                "initiator" : "REST",
+                "initiatorId" : "admin",
+                "target" : "Assignment",
+                "commandToken" : "e8b9b58e-10ea-4b76-b18b-c57c4a4ebd69",
+                "parameterValues" : {
+                    "message" : JSON.stringify(message)
+                }
+            };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                url: "http://localhost:8080/sitewhere/api/assignments/83d43843-c4a7-403c-83ac-9dc0d1918aba/invocations",
+                data:JSON.stringify(dataSend),
+                dataType: "json",
+                beforeSend: function(request){
+                    request.setRequestHeader("Content-Type","application/json");
+                    request.setRequestHeader("X-SiteWhere-Tenant","sitewhere1234567890");
+                    request.setRequestHeader("Authorization","Basic YWRtaW46cGFzc3dvcmQ=");
+                },
+                success: function () {
+                    layer.msg("成功启用");
+                },
+                error: function () {
+                    layer.msg("error");
+                }
+            });
+
         },
         'click .edit': function (e, value, row, index) {
             //获取当前行对象

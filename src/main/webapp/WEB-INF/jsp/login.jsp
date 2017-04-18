@@ -50,14 +50,7 @@
         if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
     })
 </script>
-<script>
-    function changeUrl() {
-        var url = $("#codevalidate").prop('src');
-        url = url.substr(0,url.lastIndexOf('/')+1);
-        url = url + (new Date()).valueOf();
-        $("#codevalidate").prop('src',url);
-    }
-</script>
+
 </body>
 
 </html>

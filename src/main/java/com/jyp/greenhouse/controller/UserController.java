@@ -42,7 +42,6 @@ public class UserController {
      * 登录模块
      * @param username
      * @param password
-//     * @param codevalidate
      * @param session
      * @return
      */
@@ -53,14 +52,13 @@ public class UserController {
             HttpSession session
     ) {
         ModelAndView ret;
-        Subject subject = SecurityUtils.getSubject() ;
 
+        Subject subject = SecurityUtils.getSubject() ;
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
         try {
             subject.login(token);
             User user = userService.getUserByName(username);
             session.setAttribute("username",username);
-            session.setAttribute("roleId",user.getRoleId());
             ret = new ModelAndView(new RedirectView("/index"));
             System.out.println("登陆成功");
         }catch (Exception e){

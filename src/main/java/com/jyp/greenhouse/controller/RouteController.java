@@ -1,5 +1,7 @@
 package com.jyp.greenhouse.controller;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "")
 public class RouteController {
+    @RequiresRoles(value = {"管理员","普通用户"}, logical = Logical.OR)
     @RequestMapping(value = "index")
     public String index() {
         return "index";
